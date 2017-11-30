@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sephiroth</title>
+    <link rel="shortcut icon" href="http://www.datatang.com/favicon.ico" />
+    <link rel="icon" type="image/gif" href="http://www.datatang.com/favicon.ico" />
+      <!-- <link href="http://cdn.crowd.datatang.com/Content/bootstrap.min.css" rel="stylesheet" /> -->
+      <link href="style/bootstrap.min.css" rel="stylesheet" />
+      <!-- <link href="http://cdn.crowd.datatang.com/Content/default.20151231.css" rel="stylesheet" /> -->
+      <link href="style/default.20151231.css" rel="stylesheet" />
+      
+      <script type="text/javascript" src="scripts/jquery-1.10.2/jquery.js"></script>
+      <!-- 跨域 支持 -->
+      <!-- <script type="text/javascript">document.domain = "datatang.com";</script> -->
+      
+      <link href="style/all.css" rel="stylesheet" />
+      <link href="style/default.css" rel="stylesheet">
+    <style type="text/css">
+        .main-page {
+            min-height: 500px;
+        }
+
+        textarea {
+            font-family: serif;
+        }
+
+        .radio label, .checkbox label {
+            padding-left: 0;
+        }
+
+        .w {
+            background-color: #eee;
+            padding: 10px;
+        }
+
+        .recent .item {
+            display: block;
+            line-height: 25px;
+        }
+
+        .recent {
+            background-color: #f5f5f5;
+            padding: 10px;
+        }
+
+            .recent .tit {
+                margin-bottom: 5px;
+            }
+
+        .quote {
+            position: absolute;
+            right: 0;
+            top: -15px;
+            border-radius: 50px;
+            height: 50px;
+            width: 50px;
+            text-align: center;
+            line-height: 50px;
+            z-index: 99999;
+            font-weight: lighter;
+            display: none;
+        }
+
+        .hg {
+            background-color: #20BB51;
+            color: #FFFFFF;
+        }
+
+        .bhg {
+            background-color: #FF0055;
+            color: #FFFFFF;
+        }
+    </style>
+
+    <script src="scripts/icheck/icheck.js"></script>
+    <script src="scripts/icheck/template.js"></script>
+    <script src="scripts/icheck/tang.url.js"></script>
+    <script src="scripts/icheck/crowd.do.js"></script>
+    <script src="scripts/icheck/knockout-3.0.0rc.js"></script>
+    <script src="scripts/usesys/require.min.js"></script>
+    <!-- <script type="text/javascript" src="http://pv.sohu.com/cityjson?ie=utf-8" charset="utf-8"></script> -->
+    <script src="scripts/icheck/crowd.log.js?123"></script>
+
+    <script type="text/javascript">
+        var __markInfo={
+  "projectId": 9417,
+  "assignId": 407229,
+  "personId": 1033522,
+  "dataId": 82066581,
+  "markedCount": 0,
+  "dataResultId": 0,
+  "projectTitle": "2017\u7b2c1121\u671f\u56fe\u7247\u6807\u6ce8\u4efb\u52a1",
+  "dataTitle": "1872",
+  "assignPersonName": "\u6881\u5a77",
+  "operationCase": 32,
+  "qualityPackageId": 0,
+  "isGatherSource": false,
+  "projectIntro": "",
+  "source_key": "e82364ab-d5dd-4746-aa9c-b0042212b236",
+  "loadSource": true,
+  "disable": false,
+  "TemplateId": 325,
+  "status": 1,
+  "checkstatus": 0,
+  "dataResultGuid": "c020a8dc-198f-42f4-aa85-8ace7ff17a6b",
+  "lastEditTime": "2017-08-14T17:00:32.9",
+  "qualityTime": "2017-08-14T17:00:35.19",
+  "checkTime": "0001-01-01T00:00:00",
+  "Type": 1,
+  "FileName": ""
+};
+        requirejs.config({
+            "baseUrl": "scripts/icheck",
+            "paths": {
+                "mark.render": "crowd.mark.render",
+                "mark.recent": "crowd.mark.recent",
+                "template": "crowd.mark.template"
+            }
+        });
+
+    </script>
+
+</head>
+<body>
+    
+    <header role="banner" id="top" class="navbar navbar-static-top crowd-navbar">
+        <div class="container">
+            <div class="navbar-header">
+                <button data-target=".bs-navbar-collapse" data-toggle="collapse" type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="fa fa-bar"></span>
+                    <span class="fa fa-bar"></span>
+                    <span class="fa fa-bar"></span>
+                </button>
+                <a class="navbar-brand crowd-brand" href="../"><span style="color:#fff;">Datatang</span>
+                    
+                    <span class="crowd-brand-text">任务平台</span>
+                </a>
+            </div>
+            <!--导航条-->
+            <nav role="navigation" class="collapse navbar-collapse bs-navbar-collapse">
+                <ul class="nav navbar-nav nav-menu">
+                    <li class="active"><a href="/zh-cn/dashboard">个人中心</a></li>
+                    <li><a href="/zh-cn/task">任务中心</a></li>
+                    <li><a href="/help/home" target="_blank">帮助</a></li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-globe"></i><b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="http://bz.datatang.com/en-us/407229/82066581">English</a></li>
+                            <li><a href="http://bz.datatang.com/zh-cn/407229/82066581">中文(简体)</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">jianqing<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/zh-cn/dashboard"><i class="fa fa-user" style="margin-right: 10px;color:#666"></i>个人中心</a></li>
+                                <li><a href="/Admin/Home" target="_blank"><i class="fa fa-reorder" style="margin-right: 10px; color: #666; "></i>系统管理</a></li>
+                            <li><a href="http://auth.crowd.datatang.com/zh-CN/profile" target="_blank"><i class=" fa fa-lock" style="margin-right: 10px; color: #666"></i>账号设置</a></li>
+                            <li><a href="/zh-cn/Account/SignOut"><i class="fa fa-sign-out" style="margin-right: 10px; color: #666"></i>注销</a></li>
+                            <li class="divider"></li>
+                            <li><a href="/zh-cn/Feedback"><i class=" fa fa-envelope" style="margin-right: 10px; color: #666"></i>意见反馈</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                
+
+                <!--搜索区域-->
+                <form class="navbar-form navbar-right" role="search" style="margin-right:10px;" action="/zh-cn/Search">
+                    <div class="form-group">
+                        <input type="text" name="keywords" maxlength="20" class="form-control" placeholder="任务搜索">
+                    </div>
+                    <button type="submit" class="btn btn-default" style=" border-color:#0c66b0;">搜索</button>
+                </form>
+                
+            </nav>
+        </div>
+    </header>
+    
+    <div class="content">
+        <div class="container">
+            
+
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="main-page">
+            <div id="work-space-loading" style="color: #DDDDDD; font-size: 50px; left: 0; position: absolute; right: 0; text-align: center; top: 100px;">加载中...</div>
+            <div id="work-space" style="display:none;">
+                <h5 style="margin-bottom:10px;">1872</h5>
+                <!--标注内容区域-->
+                <form method="post" class="form-horizontal mark_form" role="form" action="http://bz.datatang.com/zh-cn/407229/82066581" id="markForm">
+                    
+
+<link href="style/select2.min.css" rel="stylesheet" />
+<script src="scripts/usesys/select2.min.js"></script>
+
+<!--显示按钮-->
+   <div id="ivbox" style="position: fixed; left: 10px; top: 80px;color:#666;">
+      <a class="btn btn-default" id="cloth-box-show">显示框</a>&nbsp;<a class="btn btn-default" id="cloth-box-hide">隐藏框</a>
+    </div>
+    <div id="ivbox1" style="position: fixed; right: 10px; top: 43px;color:#666;">
+    <!-- Nav tabs -->
+    <h4>双击选择类型</h4>
+    <ul class="nav nav-tabs" role="tablist" style="width:240px">
+        <li style="padding:0px" role="presentation" class="active"><a href="#white" aria-controls="white" role="tab" data-toggle="tab">车辆</a></li>
+        <li role="presentation"><a href="#orange" aria-controls="orange" role="tab" data-toggle="tab">行人</a></li>
+        <li role="presentation"><a href="#yellow" aria-controls="yellow" role="tab" data-toggle="tab">禁止标志</a></li>
+        <li role="presentation"><a href="#blue" aria-controls="blue" role="tab" data-toggle="tab">信号灯</a></li>
+        <li role="presentation"><a href="#green" aria-controls="green" role="tab" data-toggle="tab">指示标志</a></li>
+        <li role="presentation"><a href="#other" aria-controls="other" role="tab" data-toggle="tab">其他</a></li>
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+
+        <div role="tabpanel" class="tab-pane active" id="white">
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/小型汽车.png" data-style="小型汽车" alt="小型汽车" width="80"   height="70"  selecttype="Car" selectdata="1,0,">
+                <p>小型汽车</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/厢式车.png" data-style="箱式车" alt="箱式车" width="80"   height="70"  selecttype="Car" selectdata="1,1,">
+                <p>厢式车</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/卡车.png" data-style="卡车" alt="卡车" width="80"   height="70"  selecttype="Car" selectdata="1,2,">
+                <p>卡车</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/城市公交车.png" data-style="城市公交车" alt="城市公交车" width="80"   height="70"  selecttype="Car" selectdata="1,3,">
+                <p>城市公交车</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/中型乘用车.png" data-style="中型乘用车" alt="中型乘用车" width="80"   height="70"  selecttype="Car" selectdata="1,4,">
+                <p>中型乘用车</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/长途客车.png" data-style="长途客车" alt="长途客车" width="80"   height="70"  selecttype="Car" selectdata="1,5,">
+                <p>长途客车</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/三轮车.png" data-style="三轮车" alt="三轮车" width="80"   height="70"  selecttype="Car" selectdata="1,6,">
+                <p>三轮车</p>
+            </div>
+
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/有轨电车.jpg" data-style="有轨电车" alt="有轨电车" width="80"   height="70"  selecttype="Car" selectdata="1,7,">
+                <p>有轨电车</p>
+            </div>
+            
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="orange">
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/行人.png" data-style="行人" alt="行人" width="80"   height="70"  selecttype="Pedestrians" selectdata="0,0,">
+                <p>行人</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/自行车人.png" data-style="自行车人" alt="自行车人" width="80"   height="70"  selecttype="Pedestrians" selectdata="0,1,">
+                <p>骑自行车行人</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/摩托行人.png" data-style="摩托行人" alt="摩托行人" width="80"   height="70"  selecttype="Pedestrians" selectdata="0,2,">
+                <p>骑电动自行车/摩托车行人</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/坐着的人.png" data-style="坐着的人" alt="坐着的人" width="80"   height="70"  selecttype="Pedestrians" selectdata="0,3,">
+                <p>坐着的人</p>
+            </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="yellow">
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/限制速度.jpg" data-style="限制速度" alt="限制速度" width="80"   height="70"  selecttype="Ban_sign" selectdata="4,0,">
+                <p>限制速度</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/禁止宽度.jpg" data-style="禁止宽度" alt="禁止宽度" width="80"   height="70"  selecttype="Ban_sign" selectdata="4,1,">
+                <p>禁止宽度</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/限制高度.jpg" data-style="限制高度" alt="限制高度" width="80"   height="70"  selecttype="Ban_sign" selectdata="4,2,">
+                <p>限制高度</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/限制质量.jpg" data-style="限制质量" alt="限制质量" width="80"   height="70"  selecttype="Ban_sign" selectdata="4,3,">
+                <p>限制质量</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/限制轴重.jpg" data-style="限制轴重" alt="限制轴重" width="80"   height="70"  selecttype="Ban_sign" selectdata="4,4,">
+                <p>限制轴重</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/禁止通行.jpg" data-style="禁止通行" alt="禁止通行" width="80"   height="70"  selecttype="Ban_sign" selectdata="4,5,">
+                <p>禁止通行</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/禁止驶车.jpg" data-style="禁止驶车" alt="禁止驶车" width="80"   height="70"  selecttype="Ban_sign" selectdata="4,6,">
+                <p>禁止驶车</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/禁止向左转弯.jpg" data-style="禁止向左转弯" alt="禁止向左转弯" width="80"   height="70"  selecttype="Ban_sign" selectdata="4,7,">
+                <p>禁止向左转弯</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/禁止向右转弯.jpg" data-style="禁止向右转弯" alt="禁止向右转弯" width="80"   height="70"  selecttype="Ban_sign" selectdata="4,8,">
+                <p>禁止向右转弯</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/禁止直行.jpg" data-style="禁止直行" alt="禁止直行" width="80"   height="70"  selecttype="Ban_sign" selectdata="4,9,">
+                <p>禁止直行</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/禁止向左向右转弯.jpg" data-style="禁止向左向右转弯" alt="禁止向左向右转弯" width="80"   height="70"  selecttype="Ban_sign" selectdata="4,10,">
+                <p>禁止向左向右转弯</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/禁止直行和向左转弯.jpg" data-style="禁止直行和向左转弯" alt="禁止直行和向左转弯" width="80"   height="70"  selecttype="Ban_sign" selectdata="4,11,">
+                <p>禁止直行和向左转弯</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/禁止直行和向右转弯.jpg" data-style="禁止直行和向右转弯" alt="禁止直行和向右转弯" width="80"   height="70"  selecttype="Ban_sign" selectdata="4,12,">
+                <p>禁止直行和向右转弯</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/禁止掉头.jpg" data-style="禁止掉头" alt="禁止掉头" width="80"   height="70"  selecttype="Ban_sign" selectdata="4,13,">
+                <p>禁止掉头</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/禁止超车.jpg" data-style="禁止超车" alt="禁止超车" width="80"   height="70"  selecttype="Ban_sign" selectdata="4,14,">
+                <p>禁止超车</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/解除禁止超车.jpg" data-style="解除禁止超车" alt="解除禁止超车" width="80"   height="70"  selecttype="Ban_sign" selectdata="4,15,">
+                <p>解除禁止超车</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/禁止车辆临时或长时停放.jpg" data-style="禁止车辆临时或长时停放" alt="禁止车辆临时或长时停放" width="80"   height="70"  selecttype="Ban_sign" selectdata="4,16,">
+                <p>禁止车辆临时或长时停放</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/禁止车辆长时停放.jpg" data-style="禁止车辆长时停放" alt="禁止车辆长时停放" width="80"   height="70"  selecttype="Ban_sign" selectdata="4,17,">
+                <p>禁止车辆长时停放</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/禁止鸣喇叭.jpg" data-style="禁止鸣喇叭" alt="禁止鸣喇叭" width="80"   height="70"  selecttype="Ban_sign" selectdata="4,18,">
+                <p>禁止鸣喇叭</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/禁止机动车通行.jpg" data-style="禁止机动车通行" alt="禁止机动车通行" width="80"   height="70"  selecttype="Ban_sign" selectdata="4,19,">
+                <p>禁止机动车通行</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/停车检查.jpg" data-style="停车检查" alt="停车检查" width="80"   height="70"  selecttype="Ban_sign" selectdata="4,20,">
+                <p>停车检查</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/停车让行.jpg" data-style="停车让行" alt="停车让行" width="80"   height="70"  selecttype="Ban_sign" selectdata="4,21,">
+                <p>停车让行</p>
+            </div>
+             <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/减速让行.jpg" data-style="减速让行" alt="减速让行" width="80"   height="70"  selecttype="Ban_sign" selectdata="4,22,">
+                <p>减速让行</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/会车让行.jpg" data-style="会车让行" alt="会车让行" width="80"   height="70"  selecttype="Ban_sign" selectdata="4,23,">
+                <p>会车让行</p>
+            </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="blue">
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/信号灯框.png" data-style="信号灯框" alt="信号灯框" width="80"   height="70"  selecttype="Traffic_light" selectdata="2,0,">
+                <p>信号灯框</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/普通灯.png" data-style="普通灯" alt="普通灯" width="80"   height="70"  selecttype="Traffic_light" selectdata="2,1,">
+                <p>普通灯</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/直行.png" data-style="直行" alt="直行" width="80"   height="70"  selecttype="Traffic_light" selectdata="2,2,">
+                <p>直行_信号灯</p>
+            </div>
+             <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/左转0.png" data-style="左转0" alt="左转0" width="80"   height="70"  selecttype="Traffic_light" selectdata="2,3,">
+                <p>左转</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/右转.png" data-style="右转" alt="右转" width="80"   height="70"  selecttype="Traffic_light" selectdata="2,4,">
+                <p>右转</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/掉头.png" data-style="掉头" alt="掉头" width="80"   height="70"  selecttype="Traffic_light" selectdata="2,5,">
+                <p>掉头</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/左转掉头.png" data-style="左转掉头" alt="左转掉头" width="80"   height="70"  selecttype="Traffic_light" selectdata="2,6,">
+                <p>左转掉头</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/直行左转.png" data-style="直行左转" alt="直行左转" width="80"   height="70"  selecttype="Traffic_light" selectdata="2,7,">
+                <p>直行左转</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/直行右转.jpg" data-style="直行右转" alt="直行右转" width="80"   height="70"  selecttype="Traffic_light" selectdata="2,8,">
+                <p>直行右转</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/直行掉头.gif" data-style="直行掉头" alt="直行掉头" width="80"   height="70"  selecttype="Traffic_light" selectdata="2,9,">
+                <p>直行掉头</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/数字.jpg" data-style="数字" alt="数字" width="80"   height="70"  selecttype="Traffic_light" selectdata="2,10,">
+                <p>数字</p>
+            </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="green">
+             <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/最低限速.jpg" data-style="最低限速" alt="最低限速" width="80"   height="70"  selecttype="Traffic_sign" selectdata="3,0,">
+                <p>最低限速</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/直行.jpg" data-style="直行" alt="直行" width="80"   height="70"  selecttype="Traffic_sign" selectdata="3,1,">
+                <p>直行</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/向左转弯.jpg" data-style="向左转弯" alt="向左转弯" width="80"   height="70"  selecttype="Traffic_sign" selectdata="3,2,">
+                <p>向左转弯</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/向右转弯.jpg" data-style="向右转弯" alt="向右转弯" width="80"   height="70"  selecttype="Traffic_sign" selectdata="3,3,">
+                <p>向右转弯</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/直行和向左转弯.jpg" data-style="直行和向左转弯" alt="直行和向左转弯" width="80"   height="70"  selecttype="Traffic_sign" selectdata="3,4,">
+                <p>直行和向左转弯</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/直行和向右转弯.jpg" data-style="直行和向右转弯" alt="直行和向右转弯" width="80"   height="70"  selecttype="Traffic_sign" selectdata="3,5,">
+                <p>直行和向右转弯</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/向左和向右转弯.jpg" data-style="向左和向右转弯" alt="向左和向右转弯" width="80"   height="70"  selecttype="Traffic_sign" selectdata="3,6,">
+                <p>向左和向右转弯</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/靠右侧道路行驶.jpg" data-style="靠右侧道路行驶" alt="靠右侧道路行驶" width="80"   height="70"  selecttype="Traffic_sign" selectdata="3,7,">
+                <p>靠右侧道路行驶</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/靠左侧道路行驶.jpg" data-style="靠左侧道路行驶" alt="靠左侧道路行驶" width="80"   height="70"  selecttype="Traffic_sign" selectdata="3,8,">
+                <p>靠左侧道路行驶</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/立交直行和左转弯行驶.jpg" data-style="立交直行和左转弯行驶" alt="立交直行和左转弯行驶" width="80"   height="70"  selecttype="Traffic_sign" selectdata="3,9,">
+                <p>立交直行和左转弯行驶</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/立交直行和右转弯行驶.jpg" data-style="立交直行和右转弯行驶" alt="立交直行和右转弯行驶" width="80"   height="70"  selecttype="Traffic_sign" selectdata="3,10,">
+                <p>立交直行和右转弯行驶</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/环岛行驶.jpg" data-style="环岛行驶" alt="环岛行驶" width="80"   height="70"  selecttype="Traffic_sign" selectdata="3,11,">
+                <p>环岛行驶</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/单行路向左.jpg" data-style="单行路向左" alt="单行路向左" width="80"   height="70"  selecttype="Traffic_sign" selectdata="3,12,">
+                <p>单行路向左</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/单行路向右.jpg" data-style="单行路向右" alt="单行路向右" width="80"   height="70"  selecttype="Traffic_sign" selectdata="3,13,">
+                <p>单行路向右</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/直行路(直行).jpg" data-style="直行路(直行)" alt="直行路(直行)" width="80"   height="70"  selecttype="Traffic_sign" selectdata="3,14,">
+                <p>单行路直行(直行)</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/鸣喇叭.jpg" data-style="鸣喇叭" alt="鸣喇叭" width="80"   height="70"  selecttype="Traffic_sign" selectdata="3,15,">
+                <p>鸣喇叭</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/干路先行.jpg" data-style="干路先行" alt="干路先行" width="80"   height="70"  selecttype="Traffic_sign" selectdata="3,16,">
+                <p>干路先行</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/会车先行.jpg" data-style="会车先行" alt="会车先行" width="80"   height="70"  selecttype="Traffic_sign" selectdata="3,17,">
+                <p>会车先行</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/人行横道.jpg" data-style="人行横道" alt="人行横道" width="80"   height="70"  selecttype="Traffic_sign" selectdata="3,18,">
+                <p>人行横道</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/左转车道.jpg" data-style="左转车道" alt="左转车道" width="80"   height="70"  selecttype="Traffic_sign" selectdata="3,19,">
+                <p>左转车道</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/右转车道.jpg" data-style="右转车道" alt="右转车道" width="80"   height="70"  selecttype="Traffic_sign" selectdata="3,20,">
+                <p>右转车道</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/直行车道.jpg" data-style="直行车道" alt="直行车道" width="80"   height="70"  selecttype="Traffic_sign" selectdata="3,21,">
+                <p>直行车道</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/直行和右转合用车道.jpg" data-style="直行和右转合用车道" alt="直行和右转合用车道" width="80"   height="70"  selecttype="Traffic_sign" selectdata="3,22,">
+                <p>直行和右转合用车道</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/直行和左转合用车道.jpg" data-style="直行和左转合用车道" alt="直行和左转合用车道" width="80"   height="70"  selecttype="Traffic_sign" selectdata="3,23,">
+                <p>直行和左转合用车道</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/允许调头.jpg" data-style="允许调头" alt="允许调头" width="80"   height="70"  selecttype="Traffic_sign" selectdata="3,24,">
+                <p>允许调头</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/公交线路专用车道.jpg" data-style="公交线路专用车道" alt="公交线路专用车道" width="80"   height="70"  selecttype="Traffic_sign" selectdata="3,25,">
+                <p>公交线路专用车道</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/机动车行驶.jpg" data-style="机动车行驶" alt="机动车行驶" width="80"   height="70"  selecttype="Traffic_sign" selectdata="3,26,">
+                <p>机动车行驶</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/机动车车道.jpg" data-style="机动车车道" alt="机动车车道" width="80"   height="70"  selecttype="Traffic_sign" selectdata="3,27,">
+                <p>机动车车道</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/非机动车行驶.jpg" data-style="非机动车行驶" alt="非机动车行驶" width="80"   height="70"  selecttype="Traffic_sign" selectdata="3,28,">
+                <p>非机动车行驶</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/非机动车道.jpg" data-style="非机动车道" alt="非机动车道" width="80"   height="70"  selecttype="Traffic_sign" selectdata="3,29,">
+                <p>非机动车道</p>
+            </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="other">
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/dontcare.png" data-style="dontcare" alt="dontcare" width="80"   height="70"  selecttype="Other" selectdata="-1">
+                <p>dontcare</p>
+            </div>
+            <div class="img-item">
+                <img src="http://crowdweb.blob.core.chinacloudapi.cn/100148/Misc.png" data-style="Misc" alt="Misc" width="80"   height="70"  selecttype="Other" selectdata="5,">
+                <p>Misc</p>
+            </div>
+        </div>
+
+
+        </div>
+
+</div>
+       <!--底部-->
+        <div id="cloth-area" style=" position: fixed; background-color: #ADADAD; left: 0; right: 0; padding: 5px; bottom: 0;z-index: 9999;">
+            <div>
+            </div>
+        </div>
+
+        <!--图片标注区域-->
+        <div id="work-cont">
+            <div class="dwa-loading"></div>
+            <label >总框数：<span id="boxCount" style="color:red;"></span>
+                &nbsp;&nbsp;行人：<span id="Pedestrians" style="color:red;"></span>
+                &nbsp;&nbsp;车辆：<span id="Car" style="color:red;"></span>
+                &nbsp;&nbsp;信号灯：<span id="Traffic_light" style="color:red;"></span>
+                &nbsp;&nbsp;交通标志：<span id="Traffic_sign" style="color:red;"></span>
+                &nbsp;&nbsp;禁令标志：<span id="Ban_sign" style="color:red;"></span>
+                &nbsp;&nbsp;其他：<span id="Other" style="color:red;"></span>
+            <button type="button" id="btnsavedata" style="float:right;margin-left: 25px;" display="none">保存</button>
+            </label>
+            <div id="draw-space" class="workContainer">
+                <div id="viewer" class="viewer">
+
+                </div>
+            </div>
+           <div class="pixes-tip">标注框高度均小于25px，无需标注</div>
+           <div class="pixes-tip2">标注框高度均小于20px，无需标注</div>
+           <div class="pixes-tip3">标注框高度均小于10px，无需标注</div>
+           <div class="pixes-tip_h"></div>
+        </div>
+	    <div class="rf-rect-record">		    	 	
+	    </div>
+        <div class="form-group" >
+            <label for="optionsRadios1" style="padding-top:10px" class="col-lg-2 control-label">是否有效：</label>
+            <div class="col-lg-10">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" class="radio" name="effective" id="effective" value="1" data-bind="checked:effective" checked="checked">有效数据
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" class="radio" name="effective" id="inEffective" value="2" data-bind="checked:effective">无效数据</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="box-form" style="position: absolute; left: -177px; top: 191px; border-radius: 3px; border: 1px solid rgb(115, 115, 115); box-shadow: rgb(191, 191, 191) 1px 0px 10px; z-index: 999; width: 190px; background-color: rgb(255, 255, 255); display:none;">
+            <div style="padding:10px;">
+                <div style="display:none;background-color: #FFF;margin-bottom: 10px;">
+                    <a style="float: right;display: block;width: 25px;height: 25px;text-align: center;background-color: #FB0000;line-height: 25px;color: #fff;font-size: 36px;cursor: pointer;"
+                       id="cloth-close">
+                        ×
+                    </a>
+                </div>
+
+                <p id="Traffic_light_status">
+                    <label>交通标志类型：</label>
+                    <br />
+                    <label style="width:200px;" id="InBrand"></label>
+                </p>
+
+                <p id="fujia_content">
+                    <lable>附加文本:</lable>
+                    <br />
+                    <input id="fujia" name="fujia" type="text" style="width:167px" onkeyup="this.value=this.value.replace(/[^\-?\d.]/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"/>
+                </p>
+                <!--cont方向属性-->
+                <select id="cont" name="category" class="foodform" data-live-search="true">
+                    <option value="0">正面</option>
+                    <option value="1">左侧面</option>
+                    <option value="2">右侧面</option>
+                    <option value="3">背面</option>
+                    <option value="4">其他</option>
+                </select>   
+                <!--shade遮挡属性-->
+                <select id="shade" name="category" class="foodform" data-live-search="true">
+                    <option value="0">完全未遮挡（0%）</option>
+                    <option value="1">部分遮挡（0%~35%）</option>
+                    <option value="2">大部分遮挡（35%~50%）</option>
+                    <option value="3">其它（50%以上）</option>
+                </select> 
+                <!--cut截断属性-->
+                <select id="cut" name="category" class="foodform" data-live-search="true">
+                    <option value="0">完全未截断（0%）</option>
+                    <option value="1">轻微截断（0%~15%）</option>
+                    <option value="2">部分截断（15%~30%）</option>
+                    <option value="3">大部分截断（30%~50%）</option>
+                    <option value="4">其它（50%以上）</option>
+                </select> 
+                
+                <!--Misc属性类别-->
+                <select id="misc_type" name="category" class="foodform" data-live-search="true">
+                    <option value="0">行人</option>
+                    <option value="1">车辆</option>
+                    <option value="2">指示标志</option>
+                    <option value="3">禁止标志</option>
+                    <option value="4">其它</option>
+                </select> 
+                 <select id="light_color" name="category" class="foodform" data-live-search="true">
+                    <option value="0">红</option>
+                    <option value="1">黄</option>
+                    <option value="2">绿</option>
+                    <option value="3">看不清</option>
+                </select>      
+
+                <br />
+                <p>
+                    <button type="button" id="box_save">保存</button>&nbsp;
+                    <button type="button" id="box_cancel">取消</button>
+                    <br>
+                    <span style="color:#f00;">操作完成请记得点击“保存”</span>
+                </p>
+            </div>
+        </div>
+
+
+                </form>
+
+                <!--质检表单-->
+                <form method="post" id="qualityForm">
+                    <div class="extend-form" id="quality-area" style="display:none;">
+                        <div style="clear: both;">
+                            <label>错误类型：</label>
+                            <div id="quality-form-controls"></div>
+                        </div>
+                        <div style="clear: both;">
+                            <label>审核意见：</label>
+                            <textarea class="form-control" placeholder="当数据不合格时,请说明不合格原因." name="qualityOpinion" rows="2" cols="80"></textarea>
+                        </div>
+                        <div style="line-height: 30px; color: rgb(139, 139, 139);">
+                            <label>审核时间：</label>
+                            <span data-source="qualityTime"></span>
+                        </div>
+                    </div>
+                </form>
+
+                <!--验收表单-->
+                <form method="post" id="examinerForm">
+                    <div id="examiner-area" style="padding: 10px;background-color: #eee;margin-top: 20px; display:none;">
+                        <div style="clear: both;">
+                            <label>错误类型：</label>
+                            <div id="examiner-form-controls"></div>
+                        </div>
+                        <div style="clear: both;">
+                            <label>备注信息</label>
+                            <textarea class="remark" id="exam-description" style=" border: 1px #ddd solid; width: 100%; border-radius: 3px; padding: 5px;" rows="3"></textarea>
+                        </div>
+                        <label><input type="checkbox" id="exam-autoNext" style="margin-right:5px;" /><span style="font-weight:lighter; margin-left:5px;">自动跳转下一条</span></label>
+                    </div>
+                </form>
+                <div class="btn-group btn-group-justified">
+
+
+                            <script type="text/javascript">
+
+                                requirejs(['crowd.mark.quality'],function(quality){
+
+                                    quality.loadForm({
+                                        target:$("#quality-form-controls"),
+                                        config:'',
+                                        qualityInfo:{"packgeId":73789,"status":1,"opinion":"","checkResultArray":[""],"inspectorPersonInProjectId":458611,"qualityTime":"2017-08-14T17:00:35.19","checkTime":"0001-01-01T00:00:00","checkUserName":"泛乐恩-吴建鑫"},
+                                        allowEdit:'true'
+                                    });
+                                });                          
+                            </script>
+                                            <!--质检-->
+                        <a id="do-quality-qualified" data-quality-status="1" href="javascript:;" class="btn btn-freeze btn-success btn-lg">合格</a>
+                        <a id="do-quality-substandard" href="javascript:;" data-quality-status="3" class="btn btn-freeze btn-danger btn-lg">不合格</a>
+                            <a id="do-quality-modify_qualified" href="javascript:;" data-quality-status="2" class="btn btn-freeze btn-warning btn-lg">修改&通过</a>
+                        <script type="text/javascript">
+                            // requirejs(['crowd.mark.quality'], function (quality) {
+
+                            //    quality.setQualityInfo({"packgeId":73789,"status":1,"opinion":"","checkResultArray":[""],"inspectorPersonInProjectId":458611,"qualityTime":"2017-08-14T17:00:35.19","checkTime":"0001-01-01T00:00:00","checkUserName":"泛乐恩-吴建鑫"});
+
+                            //     //合格
+                            //     $("#do-quality-qualified").click(function () {
+                            //         quality.save(1, $(this));
+                            //     });
+
+                            //     //不合格
+                            //     $("#do-quality-substandard").click(function () {
+                            //         quality.save(3, $(this));
+                            //     });
+
+                            //     //修改&通过
+                            //     $("#do-quality-modify_qualified").click(function () {
+                            //         quality.save(2, $(this));
+                            //     });
+
+                            //     //综合评价
+                            //     $("#saveFeedback").click(function () {
+                            //         var disable = $("[name='quality-disable']").parents(".checked").children(":radio").val();
+                            //         quality.saveConclusion($(this), $("#conclusion").val(), disable);
+                            //     });
+
+                            //     quality.getConclusion(function (reponse) {
+                            //         $("#conclusion-text").html(reponse.msg.replace(/\n/g, '<br/>'));
+                            //     });
+
+                            // });
+                        </script>
+                    
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+        <div class="w">
+            <h4>2017第1121期图片标注任务</h4>
+            
+            <h6>
+                    <span>标注员：梁婷 2017/8/14 17:00:32</span>
+            </h6>
+            <h6>
+                    <span>质检员：泛乐恩-吴建鑫 2017/8/14 17:00:35</span>
+            </h6>
+        </div>
+        <div style="padding: 10px; margin: 10px 0; background-color: rgb(245, 245, 245);" id="recent-im">
+            <div style="margin-bottom:5px;">我的完成情况</div>
+            <div>
+                <p>今日完成：<span id="markTodayCount">加载中...</span></p>
+            </div>
+            <div>
+                <p>累计完成：<span id="markTotalCount">加载中...</span></p>
+            </div>
+            <!--
+            <div>
+                <p>合格率：<span id="markQuality">加载中...</span></p>
+            </div>
+                -->
+        </div>
+
+            <div id="panel-qualityInfo" class="list-group">
+                <script type="text/html" id="script-qualityInfo">
+                    <div class="list-group-item active"><b>我对 梁婷 质检情况</b></div>
+                    <div class="list-group-item">今日质检：<%=todayCount%></div>
+                    <div class="list-group-item">累计检查：<%=totalCount%></div>
+                </script>
+            </div>
+            <div class="list-group">
+                <div class="list-group-item"><b>梁婷 的综合评价</b></div>
+                <div class="list-group-item">
+                    <div class="textarea-group">
+                        <div id="conclusion-text" style="margin-bottom: 5px; line-height: 23px; color: rgb(136, 136, 136);"></div>
+                        <textarea id="conclusion" class="form-control" style="resize:none; margin-bottom:5px;" rows="2" placeholder="这里可以输入对于该质检人员的整体评价"></textarea>
+                        <div style="margin:10px 0;">
+                            <label style="margin-right:10px;">
+                                <input checked="checked" id="quality-hege" name="quality-disable" type="radio" value="false" />
+                                合格
+                            </label>
+                            <label>
+                                <input id="quality-jinzhi" name="quality-disable" type="radio" value="true" />
+                                不合格(禁止标注)
+                            </label>
+                        </div>
+                        <button type="button" id="saveFeedback" class="btn btn-freeze btn-primary btn-block">提交综合评价</button>
+                    </div>
+                </div>
+            </div>
+
+
+        <!--最近标注-->
+        <div class="recent" id="recent-panel">
+            <div class="tit">最近标注的数据</div>
+        </div>
+    </div>
+
+</div>
+
+        </div>
+    </div>
+    <div class="footer">
+        <div class="container">
+            
+            <div class="cp">
+                <div class="cp-link">
+                    <a href="http://www.datatang.com/ab/statement.aspx" target="_blank">免责声明</a>
+                    <a href="" target="_blank">隐私和Cookies</a>
+                    <a href="http://bz.datatang.com/mobile/" target="_blank">移动版</a>
+                    <a href="http://www.datatang.com/ab/contact.aspx" target="_blank">联系我们</a>
+                    <span>在线人数：144</span>
+                </div>
+                <div style="clear:both;"></div>
+                <div class="cp-info">Copyright © 2011, Datatang.com 数据堂版权所有 京公网安备：110108003045号 京ICP证110554号 京ICP备11010828号-1     </div>
+            </div>
+        </div>
+    </div>
+    <script src="scripts/usesys/javaScript.extend.js"></script>
+    <script src="scripts/usesys/LAB.js"></script>
+    <script src="scripts/usesys/jquery.i18n.properties.js"></script>
+    <script type="text/javascript">
+        $LAB
+            .script("scripts/usesys/bootstrap.min.js").wait(function () {
+                $(".tip").tooltip({
+                    container: 'body'
+                });
+            });
+
+        $(function () {
+            if ($(".pager-cont").length > 0) {
+                $LAB
+                    .script("http://cdn.crowd.datatang.com/Scripts/jquery.pager.js?=20140912")
+                    .script("scripts/icheck/tang.url.js")
+                    .wait(function () {
+                        var currentPage = tangUrl.getQueryStringSingle("page");
+                        currentPage = (isNaN(currentPage) || currentPage == "") ? 1 : parseInt(currentPage);
+                        $(".pager-cont").pager({
+                            pagenumber: currentPage,
+                            pagecount: parseInt($(".pager-cont").attr("data-pageCount")),
+                            buttonClickCallback: function (pageclickednumber) {
+                                var url = tangUrl.replaceCurrentUrl({ page: pageclickednumber });
+                                window.location.href = url;
+                            }
+                        });
+                    });
+            }
+
+            $("td.num").each(function (i) {
+                var index = parseInt(i + 1);
+                $(this).text(index);
+            });
+
+            var url = this.URL;
+            var splitedUrl = url.split('/');
+            var channel = splitedUrl[4];
+
+            if (channel.indexOf('?') > -1) {
+                channel = channel.substr(0, channel.indexOf('?'));
+            }
+
+            var lang = $("html").attr("lang").toLowerCase();
+
+            $(".nav-menu a").each(function () {
+                if ($(this).attr("href") == "/" + lang + "/" + channel) {
+                    $(this).parent().addClass("active");
+                } else {
+                    $(this).parent().removeClass("active");
+                }
+            });
+
+            if ('' != "") {
+                var requestType = parseInt('');
+                if (requestType == 0) {
+                    $("#currentDiv span:first").text("任务");
+                    $("#hideDiv span").text("团队");
+                }
+                else {
+                    $("#currentDiv span:first").text("团队");
+                    $("#hideDiv span").text("任务");
+                }
+            }
+
+            var type = $("#currentDiv span:first").text();
+            changeSearch(type);
+
+            $("#currentDiv").click(function () {
+                $("#hideDiv").removeClass("hide");
+            });
+
+            $("#hideDiv").click(function () {
+                var hideTest = $("#hideDiv span").text();
+                var currentText = $("#currentDiv span:first").text();
+                $("#currentDiv span:first").text(hideTest);
+                $("#hideDiv span").text(currentText);
+                $("#hideDiv").addClass("hide");
+                type = $("#currentDiv span:first").text();
+                changeSearch(type);
+            });
+
+
+
+            function changeSearch(type) {
+                if (type == "任务") {
+                    $("#searchType").val(0);
+                }
+                else {
+                    $("#searchType").val(1);
+                }
+            }
+        });
+    </script>
+
+    
+    <script src="scripts/icheck/default.js"></script>
+    <script type="text/javascript">
+
+        //初始化
+        requirejs(['mark.recent', 'template'], function (recent, template) {
+            //最近提交数据
+            recent.bind("#recent-panel");
+            //模板初始化
+            template.initialization(__markInfo);
+        });
+    </script>
+
+        <script type="text/javascript">
+            $(function(){
+                $("#recent-panel").hide();
+                $("#recent-im").hide();
+
+                var reponse = {
+                    "todayCount":0,
+                    "totalCount":0,
+                    "lastWorkTime":"\/Date(1512057452308)\/",
+                    "initializeNumber":0
+                };
+                var html = template.render('script-qualityInfo', reponse);
+                        $("#panel-qualityInfo").html(html);
+                // $.ajax({
+                //     type: "GET",
+                //     url: '/zh-cn/Do/QualitySchedule/458611?personInProjectId=407229&projectId=9417',
+                //     data: null,
+                //     cache:false,
+                //     success: function(reponse){
+                //         var html = template.render('script-qualityInfo', reponse);
+                //         $("#panel-qualityInfo").html(html);
+                //     }
+                // });
+            });
+        </script>
+    
+
+
+</body>
+</html>
+
